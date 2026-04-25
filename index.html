@@ -3,113 +3,402 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Meheran's site</title>
-<meta name="description" content="Meheran Taraporewala — UOW CS student. Projects in AI/ML, apps, and games." />
-<link rel="stylesheet" href="./styles.css">
+<title>Meheran Taraporewala | Software Engineering Portfolio</title>
+<meta name="description" content="Meheran Taraporewala — UOW Computer Science student. Specializing in AI/ML, data pipelines, and scalable app development." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  :root {
+    --bg: #09090b;
+    --panel: #18181b;
+    --border: #27272a;
+    --border-hover: #3f3f46;
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --accent-metallic: #727272;
+    --gradient-metallic: linear-gradient(135deg, #e4e4e7 0%, #727272 50%, #27272a 100%);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-full: 9999px;
+    --container: 1040px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; scroll-behavior: smooth; }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { 
+    color: var(--text-main); 
+    font-weight: 600; 
+    line-height: 1.3; 
+    letter-spacing: -0.02em; 
+  }
+  
+  p { color: var(--text-muted); }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 40px 24px; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(9, 9, 11, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 0;
+  }
+
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .brand-title { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand-title span {
+    background: var(--gradient-metallic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 6px;
+  }
+
+  .links { display: flex; gap: 8px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+  }
+  .btn-ghost:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .btn-ghost[aria-current="page"] {
+    color: var(--text-main);
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .btn-primary {
+    background: var(--text-main);
+    color: var(--bg);
+    border: 1px solid var(--text-main);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  }
+  
+  .btn-outline {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover {
+    border-color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  main { flex: 1; padding-top: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: stretch; }
+  .col-12 { grid-column: span 12; display: flex; flex-direction: column; }
+  .col-6 { grid-column: span 6; display: flex; flex-direction: column; }
+  @media (max-width: 768px) { .col-6 { grid-column: span 12; } }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    position: relative;
+    transition: var(--transition);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+  }
+
+  .card.featured {
+    background: linear-gradient(var(--panel), var(--panel)) padding-box,
+                var(--gradient-metallic) border-box;
+    border-color: transparent;
+  }
+  
+  .card.featured:hover {
+    border-color: transparent;
+  }
+
+  .card h3 { font-size: 1.25rem; margin-bottom: 8px; }
+  .card p { margin-bottom: 20px; font-size: 0.95rem; flex-grow: 1; }
+  
+  .kicker { 
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    color: var(--text-muted); 
+    margin-bottom: 12px; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
+  .chip {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .chip:hover {
+    color: var(--text-main);
+    border-color: var(--border-hover);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .page { display: none; }
+  .page.active { display: block; animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeUp { 
+    0% { opacity: 0; transform: translateY(15px); } 
+    100% { opacity: 1; transform: none; } 
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .mt-2 { margin-top: 3rem; }
+  .mb-1 { margin-bottom: 1.5rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    padding: 40px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+</style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
+
 <header>
-  <div class="container">
+  <div class="container" style="padding-top: 0; padding-bottom: 0;">
     <nav>
-      <h1 style="font-size:clamp(28px,4vw,44px);">Meheran Taraporewala</h1>
-      <div class="links" style="margin-left:auto;">
-        <a class="btn" href="#about" data-link aria-current="page">About</a>
-        <a class="btn" href="#projects" data-link>Projects</a>
+      <div class="brand-title">
+        <span>●</span> Meheran Taraporewala
+      </div>
+      <div class="links">
+        <a class="btn btn-ghost" href="#about" data-link aria-current="page">About</a>
+        <a class="btn btn-ghost" href="#projects" data-link>Experience & Projects</a>
       </div>
     </nav>
-    <div class="hero">
   </div>
 </header>
 
 <main class="container">
-  <!-- About page -->
+  
   <section id="about" class="page active">
-    <div class="about-wrapper">
-      <div class="grid">
-        <div class="col-12">
-          <article class="card reveal" data-delay="0">
-            <h2>About Me</h2>
-            <p class="kicker">University of Wollongong • Computer Science (Big Data and AI)</p>
-            <p>I’m Meheran, currently studying Computer Science at the University of Wollongong (graduating 2026). I focus on AI/ML, data science and app development. I enjoy building projects that are practical, efficient, and help me learn something new.</p>
-          </article>
-        </div>
+    <div class="grid">
+      <div class="col-12">
+        <article class="card">
+          <div class="kicker">University of Wollongong • Expected 2026</div>
+          <h2 style="font-size: 2rem; margin-bottom: 16px;">Computer Science (Big Data & AI)</h2>
+          <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.8;">
+            I am a software engineering student specializing in Artificial Intelligence, Machine Learning pipelines, and scalable application development. I focus on building optimized, data driven systems that solve complex problems and deliver seamless user experiences. 
+          </p>
+          <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.8;">
+            Currently seeking internship opportunities to contribute to high impact projects at scale, leveraging my foundation in full stack development and data science.
+          </p>
+        </article>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-start;margin:22px 0;">
-        <span class="chip">Python</span>
-        <span class="chip">SQL (PostgreSQL, MySQL)</span>
-        <span class="chip">Swift</span>
-        <span class="chip">HTML/CSS/JavaScript</span>
-        <span class="chip">JSON</span>
-        <span class="chip">XML</span>
-        <span class="chip">Ajax</span>
-        <span class="chip">C / C++ / C#</span>
-        <span class="chip">Bash</span>
-      </div>
+    </div>
+    
+    <h3 class="section-title mt-2">Technical Core</h3>
+    <div class="chip-container">
+      <span class="chip">Python (PyTorch, scikit learn)</span>
+      <span class="chip">C / C++ / C#</span>
+      <span class="chip">Swift & SwiftUI</span>
+      <span class="chip">SQL (PostgreSQL, MySQL)</span>
+      <span class="chip">JavaScript / HTML / CSS</span>
+      <span class="chip">Git & Docker</span>
+      <span class="chip">Data Structures & Algorithms</span>
+      <span class="chip">Machine Learning Pipelines</span>
+      <span class="chip">RESTful APIs</span>
     </div>
   </section>
 
-  <!-- Projects page -->
   <section id="projects" class="page">
-    <h2 style="margin:6px 0 8px">Projects</h2>
+    
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="grid mb-1">
+      
+      <div class="col-6">
+        <div class="card featured">
+          <div class="kicker">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent-metallic);"></span>
+            AI Engineer • Mar 2026 - Present
+          </div>
+          <h3>LYC Partners.ai</h3>
+          <p>
+            Architected an automated candidate assessment system using DeepSeek LLM APIs and prompt engineering, decreasing manual screening time from 3.0 to ~1.7 minutes per applicant. Engineered a full stack dashboard to parse unstructured resumes into structured, sortable profiles.
+          </p>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <span class="btn btn-outline" style="opacity: 0.6; cursor: default;">Current Role</span>
+          </div>
+        </div>
+      </div>
 
-    <!-- Completed -->
-    <div class="grid">
-      <div class="col-12"><h3 style="margin:8px 0 10px">Completed</h3></div>
-      <div class="col-12">
-        <div class="card reveal" data-tilt>
-          <h3 style="margin-top:0">Sales Predictor</h3>
-          <p class="muted">Python • scikit-learn • forecasting</p>
-          <p>End-to-end ML pipeline for predicting sales: data cleaning, feature engineering, model training, and evaluation.</p>
-          <p class="muted">Data cleaning • Feature engineering • Model training • Trend visualisation</p>
-          <a class="btn" href="https://github.com/mehe-ran/Sales-Predictor" target="_blank" rel="noopener">View on GitHub</a>
+      <div class="col-6">
+        <div class="card">
+          <div class="kicker">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--text-muted);"></span>
+            Data & ML Intern • Oct 2024 - Nov 2024
+          </div>
+          <h3>Al Khaleej Sugar</h3>
+          <p>
+            Engineered automated Python data pipelines utilizing Pandas and NumPy to clean, structure, and aggregate large scale transactional datasets. Conducted EDA and implemented baseline linear regression algorithms using scikit learn to analyze feature weightings and pricing relationships.
+          </p>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <span class="btn btn-outline" style="opacity: 0.6; cursor: default;">Completed Internship</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- In progress -->
-    <div class="grid" style="margin-top:12px">
-      <div class="col-12"><h3 style="margin:8px 0 10px">In progress</h3></div>
-
-      <div class="col-12">
-        <div class="card reveal" data-tilt>
-          <h3 style="margin-top:0">PeriodT — ML Period Tracker</h3>
-          <p class="muted">Python • PyTorch/Scikit-learn • privacy-first</p>
-          <p>Predicts cycle phases and offers insights with a focus on data minimisation and explainability. On-device inference planned.</p>
-          <p class="muted">AI-powered predictions • Privacy-first design • Planned on-device processing</p>
-          <a class="btn" href="#" aria-disabled="true">In Progress</a>
+    <h2 class="section-title mt-2">Active Projects & Research</h2>
+    <div class="grid">
+      
+      <div class="col-6">
+        <div class="card featured">
+          <div class="kicker">Deep Learning • CNNs • Computer Vision</div>
+          <h3>PixelScale: AI Image Super Resolution</h3>
+          <p>
+            Building a Convolutional Neural Network (CNN) pipeline to upscale low resolution images while preserving high frequency edge details. Focuses on advanced feature extraction to improve upon standard interpolation methods.
+          </p>
         </div>
       </div>
 
-      <div class="col-12">
-        <div class="card reveal" data-tilt>
-          <h3 style="margin-top:0">TimeTogether — Timezone Companion</h3>
-          <p class="muted">SwiftUI • Firebase • UX</p>
-          <p>Helps long-distance couples compare schedules across time zones, plan calls, and coordinate events with a clean, customizable UI.</p>
-          <p class="muted">Timezone comparison • Custom themes • Firebase login • Responsive UI</p>
-          <a class="btn" href="#" aria-disabled="true">In Progress</a>
+      <div class="col-6">
+        <div class="card">
+          <div class="kicker">PyTorch • On Device ML • Privacy</div>
+          <h3>PeriodT: Privacy First ML Tracker</h3>
+          <p>
+            Developing a machine learning health tracking application using PyTorch. Emphasizes data minimization and explainable AI, with plans for local on device processing to protect user privacy.
+          </p>
         </div>
       </div>
 
-      <div class="col-12">
-        <div class="card reveal" data-tilt>
-          <h3 style="margin-top:0">ChessBot — AI Chess Game</h3>
-          <p class="muted">Python • PyTorch • GUI</p>
-          <p>Chess engine with neural move suggestions and adjustable search depth; desktop UI for play and analysis.</p>
-          <p class="muted">Neural move suggestions • Search depth slider • GUI for play & analysis</p>
-          <a class="btn" href="#" aria-disabled="true">In Progress</a>
+      <div class="col-6">
+        <div class="card">
+          <div class="kicker">SwiftUI • Firebase • iOS Architecture</div>
+          <h3>TimeTogether: iOS Synchronization App</h3>
+          <p>
+            Designing a native iOS application for global schedule synchronization. Uses Firebase authentication and SwiftUI for timezone comparison, UI updates, and cross border event coordination.
+          </p>
         </div>
       </div>
+
+      <div class="col-6">
+        <div class="card">
+          <div class="kicker">Python • Heuristics • GUI</div>
+          <h3>ChessBot: Neural Chess Engine</h3>
+          <p>
+            Creating a custom chess engine that combines neural network move evaluation with traditional optimizations. Implements Minimax with Alpha Beta pruning and includes a desktop GUI for analysis.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 </main>
 
 <footer>
   <div class="container">
-    <small class="muted">© <span id="y"></span> Meheran Taraporewala</small>
+    <p>© <span id="year"></span> Meheran Taraporewala.</p>
   </div>
 </footer>
 
-<script src="./main.js"></script>
+<script>
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.querySelectorAll('[data-link]');
+
+  function setActive(hash){
+    const target = (hash || '#about').replace('#','');
+    let found = false;
+    
+    pages.forEach(p => {
+      if(p.id === target) {
+        p.classList.add('active');
+        found = true;
+      } else {
+        p.classList.remove('active');
+      }
+    });
+    
+    if(!found && pages.length > 0) {
+      pages[0].classList.add('active');
+    }
+
+    navLinks.forEach(a => {
+      if (a.getAttribute('href') === `#${target}`) {
+        a.setAttribute('aria-current', 'page');
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+    
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  window.addEventListener('hashchange', () => setActive(location.hash));
+  setActive(location.hash);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
